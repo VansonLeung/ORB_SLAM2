@@ -145,6 +145,102 @@
 
 
 
+2020-07
+
+
+    上一篇SLAM學習之路#1 簡介對SLAM想探討的問題做了初步的介紹，接著話不多說，直接從Project中Learning by doing吧！
+    ORB-SLAM是一個基於Monocular, Stereo and RGB-D多種camera的real time SLAM的open source library，作者是Raul Mur-Artal等大神，至於詳細的內容會在之後陸續介紹，此篇先以基於Ubuntu16.04的ORB-SLAM2環境建置為主，附上原著source code GitHub網址。
+    （一）ROS
+    (1) cmake
+    sudo apt-get install cmake
+    (2) Software & Updates設定
+    Image for post
+    (3) 設定sources.list（從packages.ros.org接收）
+    1. sudo sh -c ‘echo “deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main” > /etc/apt/sources.list.d/ros-latest.list’
+    2. sudo apt-key adv — keyserver hkp://ha.pool.sks-keyservers.net:80 — recv-key 0xB01FA116
+    (4) key
+    sudo apt-key adv — keyserver hkp://ha.pool.sks-keyservers.net:80 — recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
+    (5) sudo apt-get update
+    (6) 安裝ROS lib及工具（共提供四種版本，以下只介紹Desktop-Full）
+    sudo apt-get install ros-kinetic-desktop-full(Desktop-Full Install)
+    (7) 環境變數設定
+    1. echo “source /opt/ros/kinetic/setup.bash” >> ~/.bashrc
+    2. source ~/.bashrc
+    (8) 安裝 rosinstall
+    sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool build-essential -y
+    (9) 測試ROS
+    roscore
+    Image for post
+    輸出以上畫面代表安裝成功
+    （二）ORB-SLAM
+    (10) 安裝Pangolin
+    1. sudo apt-get install libglew-dev libpython2.7-dev libboost-dev libboost-thread-dev libboost-filesystem-dev -y
+    2. mkdir build
+    3. cd build
+    4. cmake ..
+    5. make
+    6. sudo make install
+    (11) 安裝opencv
+    1. sudo apt-get install build-essential -y
+    2. sudo apt-get install libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev -y
+    (option)3.
+    sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394–22-dev -y
+    sudo apt-get install libgtk2.0-dev -y
+    sudo apt-get install pkg-config -y
+    4. wget https://github.com/Itseez/opencv/archive/2.4.13.zip
+    5. unzip 2.4.13.zip
+    6. cd opencv-2.4.13/
+    7. mkdir build
+    8. cd build
+    9. cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local ..
+    10. make
+    11. sudo make install
+    12. 將opencv的lib加入路徑，讓系統能看得到
+    sudo vim /etc/ld.so.conf.d/opencv.conf，末端加入/usr/local/lib
+    sudo ldconfig
+    sudo gedit /etc/bash.bashrc（末尾加入PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig）
+    export PKG_CONFIG_PATH
+    source /etc/bash.bashrc （使設定生效）
+    （12）安裝Eigen3
+    1. wget https://bitbucket.org/eigen/eigen/get/3.2.10.tar.bz2
+    2. tar -xjf 3.2.10.tar.bz2
+    3. mv eigen-eigen-b9cd8366d4e8/ eigen-3.2.10
+    4. cd eigen-3.2.10/
+    5. mkdir build
+    6. cd build
+    7. cmake ..
+    8. make
+    9. sudo make install
+    （13）安裝 ORB SLAM2
+    1. git clone https://github.com/raulmur/ORB_SLAM2.git
+    2. cd ORB_SLAM2
+    (option)3. gedit build.sh（將make -j改成自己想要的）
+    4. ./build.sh
+    （14）執行單目Example
+    1. 下載資料
+    Image for post
+    2. 解壓縮，將rgbd_dataset_freiburg1_xyz資料夾放置$HOME/Downloads
+    3. ./Examples/Monocular/mono_tum Vocabulary/ORBvoc.txt Examples/Monocular/TUM1.yaml $HOME/Downloads/rgbd_dataset_freiburg1_xyz
+    4. 執行結果如下：
+    Image for post
+    （三）遇到問題
+    （15）
+    Q：執行sudo apt-get install ros-kinetic-desktop-full時遇到E: Unable to locate package ros-kinetic-desktop-full？
+    A： 有可能是install到錯誤的kernel
+    sudo apt-get update
+    依照ubuntu的版本install對應的
+    Image for post
+    （16）
+    Q：
+    Image for post
+    A：
+    Image for post
+    Reference：
+    1. https://blog.csdn.net/radiantjeral/article/details/82193370?fbclid=IwAR0_MKcIvssXxh1eH6lOabc_DrTsxULn47USt9-g__3R3tcT0yHxk_lZOnA
+    2. https://medium.com/@j.zijlmans/orb-slam-2052515bd84c
+    3. https://www.cnblogs.com/liu-fa/p/5779206.html?fbclid=IwAR0lPv4b1Fy6H34B8xQ2ESRjXVsY76Tgp3VzeflsblqDh4AFK-QSQHfjdv0
+
+
 
 
 # ORB-SLAM2
