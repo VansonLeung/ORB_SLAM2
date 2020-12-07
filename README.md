@@ -1,3 +1,152 @@
+# Van Notes:
+
+2020-12
+
+    ✔ SLAM @done (20-12-06 20:26)
+        ✔ https://blog.csdn.net/KID_yuan/article/details/101272481 @done (20-12-06 20:20)
+        ✔ https://medium.com/@ckwang19/slam學習之路-2-ros-orb-slam環境建置-67c6d9577b5c @done (20-12-06 20:20)
+
+        ./Examples/Monocular/mono_tum Vocabulary/ORBvoc.txt Examples/Monocular/TUM1.yaml $HOME/Downloads/rgbd_dataset_freiburg1_xyz
+
+        gdb ./Examples/Monocular/mono_tum 
+        run Vocabulary/ORBvoc.txt Examples/Monocular/TUM1.yaml $HOME/Downloads/rgbd_dataset_freiburg1_xyz
+
+        roscore
+        sudo apt-get install ros-melodic-usb-cam
+        sudo apt-get install ros-melodic-image-view
+        cd ~/catkin_ws
+        catkin_make
+        source ./devel/setup.bash
+
+        sudo ln -s /usr/local/include/eigen3 /usr/include/eigen3
+
+        roslaunch usb_cam usb_cam-test.launch
+
+        export ROS_PACKAGE_PATH=${ROS_PACKAGE_PATH}:/home/van/ORB_SLAM2/Examples/ROS/ORB_SLAM2
+
+        gedit ~/catkin_ws/src/ORB_SLAM2/CMakeLists.txt
+        gedit ~/catkin_ws/src/ORB_SLAM2/ThirdParty/g2o/CMakeLists.txt
+        gedit ~/catkin_ws/src/ORB_SLAM2/Examples/ROS/ORB_SLAM2/CMakeLists.txt
+
+                #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall  -O3 -march=native ")
+                #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall   -O3 -march=native")
+
+                # VAN HACK
+                set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall  -O3 ")
+                set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall   -O3 ")
+
+
+                #VAN HACK
+                set(LIBS 
+                ${OpenCV_LIBS} 
+                ${EIGEN3_LIBS}
+                ${Pangolin_LIBRARIES}
+                ${PROJECT_SOURCE_DIR}/../../../Thirdparty/DBoW2/lib/libDBoW2.so
+                ${PROJECT_SOURCE_DIR}/../../../Thirdparty/g2o/lib/libg2o.so
+                ${PROJECT_SOURCE_DIR}/../../../lib/libORB_SLAM2.so
+                -lboost_system
+                )
+
+        gedit ~/catkin_ws/src/ORB_SLAM2/Examples/ROS/ORB_SLAM2/src/ros_mono.cc
+
+                camera/image_raw  >>> usb_cam/image_raw
+
+        cd ~/catkin_ws/src/ORB_SLAM2/
+        ./build.sh
+        ./build_ros.sh
+        cd build
+        sudo make install
+
+
+        cd ~/catkin_ws/src/ORB_SLAM2/Examples/ROS/ORB_SLAM2
+        mkdir build
+        cd build
+        cmake ..
+        make 
+        cd ../../../../../
+
+
+        rosrun ORB_SLAM2 Mono /home/van/catkin_ws/src/ORB_SLAM2/Vocabulary/ORBvoc.txt /home/van/catkin_ws/src/ORB_SLAM2/Examples/ROS/ORB_SLAM2/Asus.yaml 
+
+
+
+        sudo apt install libboost-serialization-dev
+
+        sudo apt-get install ros-melodic-octomap ros-melodic-octomap-mapping ros-melodic-octomap-msgs  ros-melodic-octomap-ros ros-melodic-octomap-rviz-plugins ros-melodic-octomap-server
+
+        cd ~
+        git clone https://github.com/TUMFTM/orbslam-map-saving-extension.git
+
+        cd orbslam-map-saving-extension
+        cd orb_slam2_lib
+        mkdir build
+        cd build
+        cmake ..
+        make
+        sudo make install
+
+
+        cd ../
+        cd Vocabulary
+        tar -xf ORBvoc.txt.tar.gz
+        ./bin_vocabulary
+
+        sudo pip install kitti2bag
+
+        wget https://s3.eu-central-1.amazonaws.com/avg-kitti/raw_data/2011_09_30_drive_0027/2011_09_30_drive_0027_sync.zip
+        wget https://s3.eu-central-1.amazonaws.com/avg-kitti/raw_data/2011_09_30_calib.zip
+        unzip 2011_09_30_drive_0027_sync.zip
+        unzip 2011_09_30_calib.zip
+        kitti2bag -t 2011_09_30 -r 0027 raw_synced
+
+
+        sudo pip install matplotlib
+        sudo pip install evo 
+
+
+
+        cmake ..
+
+        wget http://mirrors.kernel.org/ubuntu/pool/main/u/udev/libudev0_175-0ubuntu9_amd64.deb
+        dpkg -i libudev0_175-0ubuntu9_amd64.deb
+        sudo apt-get install libudev1:i386
+
+        readelf -s -W /usr/lib/x86_64-linux-gnu/libboost_python3-py36.so | grep _ZTIN5boost6python15instance_holderE
+               277: 000000000023c4e0    40 OBJECT  WEAK   DEFAULT   20 _ZTIN5boost6python15instance_holderE
+
+        python3 /home/van/catkin_ws/src/ORB_SLAM2/Examples/ORB_SLAM2-PythonBindings/examples/orbslam_mono_kitti.py /home/van/catkin_ws/src/ORB_SLAM2/Vocabulary/ORBvoc.txt /home/van/catkin_ws/src/ORB_SLAM2/Examples/Monocular/KITTI00-02.yaml ~/2011_09_30/2011_09_30_drive_0027_sync/image_00
+
+        python3 /home/van/catkin_ws/src/ORB_SLAM2/Examples/ORB_SLAM2-PythonBindings/examples/orbslam_mono_tum.py /home/van/catkin_ws/src/ORB_SLAM2/Vocabulary/ORBvoc.txt /home/van/catkin_ws/src/ORB_SLAM2/Examples/Monocular/TUM1.yaml /home/van/Downloads/rgbd_dataset_freiburg1_xyz
+
+
+
+
+
+2020-08
+
+
+https://emanual.robotis.com/docs/en/platform/turtlebot3/simulation/#simulation
+
+https://answers.ros.org/question/286300/when-i-use-matlab-ros-toolbox-turtlebot3-tutorial-simulation-will-not-work/
+
+https://varhowto.com/how-to-fix-libcurl-51-ssl-no-alternative-certificate-subject-name-matches-target-host-name-api-ignitionfuel-org-gazebo-ubuntu-ros-melodic/
+
+https://answers.gazebosim.org//question/22263/error-in-rest-request-for-accessing-apiignitionorg/
+
+sudo apt-get install ros-melodic-robot-state-publisher
+sudo apt-get install ros-melodic-rviz
+sudo apt-get install ros-melodic-gazebo-ros
+
+sudo apt-get install ros-melodic-joy ros-melodic-teleop-twist-joy ros-melodic-teleop-twist-keyboard ros-melodic-laser-proc ros-melodic-rgbd-launch ros-melodic-depthimage-to-laserscan ros-melodic-rosserial-arduino ros-melodic-rosserial-python ros-melodic-rosserial-server ros-melodic-rosserial-client ros-melodic-rosserial-msgs ros-melodic-amcl ros-melodic-map-server ros-melodic-move-base ros-melodic-urdf ros-melodic-xacro ros-melodic-compressed-image-transport ros-melodic-rqt-image-view ros-melodic-gmapping ros-melodic-navigation ros-melodic-interactive-markers
+
+
+export TURTLEBOT3_MODEL=waffle
+roslaunch turtlebot3_gazebo turtlebot3_house.launch
+
+
+
+
+
 # ORB-SLAM2
 **Authors:** [Raul Mur-Artal](http://webdiis.unizar.es/~raulmur/), [Juan D. Tardos](http://webdiis.unizar.es/~jdtardos/), [J. M. M. Montiel](http://webdiis.unizar.es/~josemari/) and [Dorian Galvez-Lopez](http://doriangalvez.com/) ([DBoW2](https://github.com/dorian3d/DBoW2))
 
