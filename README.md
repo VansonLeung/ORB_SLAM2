@@ -125,23 +125,23 @@
 2020-08
 
 
-https://emanual.robotis.com/docs/en/platform/turtlebot3/simulation/#simulation
+    https://emanual.robotis.com/docs/en/platform/turtlebot3/simulation/#simulation
 
-https://answers.ros.org/question/286300/when-i-use-matlab-ros-toolbox-turtlebot3-tutorial-simulation-will-not-work/
+    https://answers.ros.org/question/286300/when-i-use-matlab-ros-toolbox-turtlebot3-tutorial-simulation-will-not-work/
 
-https://varhowto.com/how-to-fix-libcurl-51-ssl-no-alternative-certificate-subject-name-matches-target-host-name-api-ignitionfuel-org-gazebo-ubuntu-ros-melodic/
+    https://varhowto.com/how-to-fix-libcurl-51-ssl-no-alternative-certificate-subject-name-matches-target-host-name-api-ignitionfuel-org-gazebo-ubuntu-ros-melodic/
 
-https://answers.gazebosim.org//question/22263/error-in-rest-request-for-accessing-apiignitionorg/
+    https://answers.gazebosim.org//question/22263/error-in-rest-request-for-accessing-apiignitionorg/
 
-sudo apt-get install ros-melodic-robot-state-publisher
-sudo apt-get install ros-melodic-rviz
-sudo apt-get install ros-melodic-gazebo-ros
+    sudo apt-get install ros-melodic-robot-state-publisher
+    sudo apt-get install ros-melodic-rviz
+    sudo apt-get install ros-melodic-gazebo-ros
 
-sudo apt-get install ros-melodic-joy ros-melodic-teleop-twist-joy ros-melodic-teleop-twist-keyboard ros-melodic-laser-proc ros-melodic-rgbd-launch ros-melodic-depthimage-to-laserscan ros-melodic-rosserial-arduino ros-melodic-rosserial-python ros-melodic-rosserial-server ros-melodic-rosserial-client ros-melodic-rosserial-msgs ros-melodic-amcl ros-melodic-map-server ros-melodic-move-base ros-melodic-urdf ros-melodic-xacro ros-melodic-compressed-image-transport ros-melodic-rqt-image-view ros-melodic-gmapping ros-melodic-navigation ros-melodic-interactive-markers
+    sudo apt-get install ros-melodic-joy ros-melodic-teleop-twist-joy ros-melodic-teleop-twist-keyboard ros-melodic-laser-proc ros-melodic-rgbd-launch ros-melodic-depthimage-to-laserscan ros-melodic-rosserial-arduino ros-melodic-rosserial-python ros-melodic-rosserial-server ros-melodic-rosserial-client ros-melodic-rosserial-msgs ros-melodic-amcl ros-melodic-map-server ros-melodic-move-base ros-melodic-urdf ros-melodic-xacro ros-melodic-compressed-image-transport ros-melodic-rqt-image-view ros-melodic-gmapping ros-melodic-navigation ros-melodic-interactive-markers
 
 
-export TURTLEBOT3_MODEL=waffle
-roslaunch turtlebot3_gazebo turtlebot3_house.launch
+    export TURTLEBOT3_MODEL=waffle
+    roslaunch turtlebot3_gazebo turtlebot3_house.launch
 
 
 
